@@ -1,0 +1,31 @@
+** sch_path: /foss/designs/ws/xor2_1/xschem/XNOR2_1.sch
+.subckt XNOR2_1 VDD Z B A VSS
+*.PININFO A:I B:I Z:O VDD:B VSS:B
+x1 net2 VDD net1 net3 VSS B TG
+x2 B VDD net1 net4 VSS net2 TG
+x3 VDD B net2 VSS inv
+x5 VDD A net4 VSS inv
+x4 VDD net1 net5 VSS inv
+x6 VDD net5 Z VSS inv
+x7 VDD net4 net3 VSS inv
+.ends
+
+* expanding   symbol:  TG.sym # of pins=6
+** sym_path: /foss/designs/ws/xor2_1/xschem/TG.sym
+** sch_path: /foss/designs/ws/xor2_1/xschem/TG.sch
+.subckt TG PG VDD Y A VSS PGB
+*.PININFO A:I Y:O PG:I PGB:I VDD:B VSS:B
+M1 A PG Y VDD pfet_03v3 L=0.3u W=1.7u nf=1
+M2 Y PGB A VSS nfet_03v3 L=0.3u W=0.85u nf=1
+.ends
+
+
+* expanding   symbol:  inv.sym # of pins=4
+** sym_path: /foss/designs/ws/xor2_1/xschem/inv.sym
+** sch_path: /foss/designs/ws/xor2_1/xschem/inv.sch
+.subckt inv VDD A Y VSS
+*.PININFO A:I VDD:B VSS:B Y:O
+M1 Y A VDD VDD pfet_03v3 L=0.3u W=1.7u nf=1
+M2 Y A VSS VSS nfet_03v3 L=0.3u W=0.85u nf=1
+.ends
+
