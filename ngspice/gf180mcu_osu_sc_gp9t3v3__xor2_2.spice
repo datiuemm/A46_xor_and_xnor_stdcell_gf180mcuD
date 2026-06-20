@@ -1,0 +1,47 @@
+** sch_path: /foss/designs/ws/xor2_1/xschem/XOR2_1.sch
+.subckt gf180mcu_osu_sc_gp9t3v3__xor2_2 VDD Z B A VSS
+*.ipin A
+*.ipin B
+*.opin Z
+*.iopin VDD
+*.iopin VSS
+x1 net3 VDD net2 net4 VSS B TG
+x2 B VDD net2 net1 VSS net3 TG
+x3 VDD B net3 VSS inv
+x4 VDD net1 net4 VSS inv
+x5 VDD A net1 VSS inv
+x6 VDD net2 Z VSS inv
+**.ends
+
+* expanding   symbol:  TG.sym # of pins=6
+** sym_path: /foss/designs/ws/xor2_1/xschem/TG.sym
+** sch_path: /foss/designs/ws/xor2_1/xschem/TG.sch
+.subckt TG PG VDD Y A VSS PGB
+*.ipin A
+*.opin Y
+*.ipin PG
+*.ipin PGB
+*.iopin VDD
+*.iopin VSS
+XM1 A PG Y VDD pfet_03v3 L=0.3u W=3.4u nf=2 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XM2 Y PGB A VSS nfet_03v3 L=0.3u W=1.7u nf=2 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+.ends
+
+
+* expanding   symbol:  inv.sym # of pins=4
+** sym_path: /foss/designs/ws/xor2_1/xschem/inv.sym
+** sch_path: /foss/designs/ws/xor2_1/xschem/inv.sch
+.subckt inv VDD A Y VSS
+*.ipin A
+*.iopin VDD
+*.iopin VSS
+*.opin Y
+XM1 Y A VDD VDD pfet_03v3 L=0.3u W=3.4u nf=2 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XM2 Y A VSS VSS nfet_03v3 L=0.3u W=1.7u nf=2 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+.ends
+
+.end
